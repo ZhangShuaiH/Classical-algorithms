@@ -52,7 +52,7 @@ void bubble_sort0(int a[], int size){
 }
 
 
-// 不稳定。找出【数组无序部分】的最小值，放到【数组无序部分】的开头
+// 不稳定，不是典型的冒泡算法。找出【数组无序部分】的最小值，放到【数组无序部分】的开头
 void bubble_sort1(int a[], int size){
     // i：未排序数组的第一个数的下标
     for(int i = 0; i < size; i++){
