@@ -15,10 +15,8 @@ void print(int a[], int size){
 
 /***********************************
  *************冒泡排序***************
- 时间复杂度 O(n^2)
- 空间复杂度 O(1)
 ************************************/
-void bubble_sort(int a[], int size){
+void bubble_sort0(int a[], int size){
     /****************************************************************
      * 1.记录遍历次数（遍历前计数。若遍历后计数，则值域为0<=次数<=size-2），使用循环
      * 2.次数值域
@@ -69,10 +67,26 @@ void bubble_sort1(int a[], int size){
     }
 }
 
+void bubble_sort2(int a[], int size){
+    int ergodic_time = 0;// 遍历次数，遍历结束时计数
+    do{
+        // 最大数排最后面
+        for(int i = 0; i+1 < size-ergodic_time; i++){
+            // 将大数排后面
+            if(a[i]>a[i+1]){
+                int temp = a[i];
+                a[i] = a[i+1];
+                a[i+1] = temp;
+            }
+        }
+        ergodic_time++;
+    }while(ergodic_time<size-1);
+}
+
 int main()
 {
     int a[] = {6,4,5,3,2,1};
     int n = sizeof(a)/sizeof(int);
-    bubble_sort1(a, n);
+    bubble_sort2(a, n);
     print(a, n);
 }
