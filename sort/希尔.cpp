@@ -8,8 +8,7 @@ void shell_sort(int a[], const int size) {
     for (int increment = size / 2; increment >= 1; increment /= 2)
         for (int i = 0; i < size; i++)
         {
-            int temp = a[i];
-            int j;
+            int j, temp = a[i];
             for (j = i; j - increment >= 0 && a[j - increment] > temp; j -= increment)
                 a[j] = a[j - increment];
             a[j] = temp;
