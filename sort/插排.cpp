@@ -49,7 +49,7 @@ void insertion_sort1(int a[], const int size){
         int temp = a[i];
         int j;
         // 倒序遍历有序部分，将大于 temp 的数依次后移
-        for(j = i; j>=0 && a[j-1]>temp; j--){
+        for(j = i; j-1>=0 && a[j-1]>temp; j--){
             a[j] = a[j-1];// a[i] 被覆盖
         }
         // 将 temp 插入到小于等于 temp 的元素后面
