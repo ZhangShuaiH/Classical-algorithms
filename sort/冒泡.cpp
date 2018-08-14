@@ -3,9 +3,6 @@
 
 using namespace std;
 
-/*************************
- * 经典排序算法总结
-**************************/
 void print(int a[], int size){
     for(int i = 0; i < size; i++){
         cout<<a[i]<<" ";
@@ -73,7 +70,39 @@ void bubble_sort1(int a[], int size){
         ergodic_time++;
     }while(ergodic_time<size-1);
 }
-
+// 优化后的冒泡排序，对于整体有序的序列，可大大减少比较次数
+void bubble_sort_optimize(int a[], const int size){
+    int comparedTime = 0;
+    int swapped = true;// 若未发生移动，则完成全部排序
+    int lastSwappedIndex;// 最后一次交换的位置，其后的元素完成排序
+    for(int i = 0; i<size && swapped; i = size-(lastSwappedIndex+1)){
+        swapped = false;
+        for(int j = 0; j+1 < size-i; j++){
+            comparedTime++;
+            if(a[j]>a[j+1]){
+                int temp = a[j];
+                a[j] = a[j+1];
+                a[j+1] = temp;
+                swapped = true;
+                lastSwappedIndex = j;
+            }
+        }
+    }
+    cout<<"compared time: "<<comparedTime<<endl;
+    cout<<"saved time: "<<(size*(size-1)/2)-comparedTime<<endl;
+}
+// 标准冒泡排序
+void bubble_sort_standard(int a[], const int size){
+    for(int i = 0; i < size; i++){
+        for(int j=0; j+1<size-i; j++){
+            if(a[j]>a[j+1]){
+                int temp = a[j];
+                a[j] = a[j+1];
+                a[j+1] = temp;
+            }
+        }
+    }
+}
 int main()
 {
     int a[] = {6,4,5,3,2,1};
