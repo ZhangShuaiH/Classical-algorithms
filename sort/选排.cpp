@@ -23,7 +23,22 @@ void selection_sort(int a[], int size){
         }
     }
 }
-
+// 交换次数较少，效率较高
+void select_sort1(int a[], int n) {
+    int min_index;
+    for (int i = 0; i < n; i++) {
+        min_index = i;
+        for (int j = i + 1; j < n; j++) {
+            if (a[j] < a[min_index])
+                min_index = j;
+        }
+        if (min_index != i) {
+            a[i] = a[i] ^ a[min_index];
+            a[min_index] = a[i] ^ a[min_index];
+            a[i] = a[i] ^ a[min_index];
+        }
+    }
+}
 int main()
 {
     int a[] = {6,4,5,3,2,1};
