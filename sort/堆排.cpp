@@ -1,0 +1,69 @@
+#include <iostream>
+
+using namespace std;
+
+void print(int a[], int size){
+    for(int i=0; i<size; i++){
+        cout<<a[i]<<" ";
+    }
+    cout<<endl;
+}
+
+void swap(int a[], int i, int j){
+    if(i==j)return;
+    else {
+        a[i] = a[i]^a[j];
+        a[j] = a[i]^a[j];
+        a[i] = a[i]^a[j];
+    }
+}
+
+/// 堆排序
+void heapSort(int a[], int size){
+    int cur,parent,max,left,right;
+    /// 建大顶堆
+    for(int i=0; i<size; i++){
+        cur = i;
+        while (cur != 0) {
+            parent = (cur-1)/2;
+            if(a[parent]<a[cur]){
+                swap(a, parent, cur);
+                cur = parent;
+            }else {
+                break;
+            }
+        }
+    }
+
+    for(int i=size-1; i >= 0; i--){
+        swap(a, 0, i);
+        cur = 0;
+        while (cur*2+1<i) {
+            max = cur;
+            left = cur*2+1;
+            right = left+1;
+            if(a[left] > a[max]){
+                max = left;
+            }
+            if(right<i && a[right]>a[max]){
+                max = right;
+            }
+            if(cur != max){
+                swap(a, max, cur);
+                cur = max;
+            }else{
+                break;
+            }
+        }
+    }
+}
+
+int main()
+{
+    int a[] = {12, 10, 23, 67, 8, 10};
+    int size = sizeof(a)/sizeof(int);
+    print(a, size);
+    heapSort(a, size);
+    print(a, size);
+    return(0);
+}
