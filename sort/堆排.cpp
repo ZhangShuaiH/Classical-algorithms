@@ -18,6 +18,24 @@ void swap(int a[], int i, int j){
     }
 }
 
+void heapify(int a[], const int low, const int high){// 大堆顶变化后，将其重新变成堆
+    int cur, left, right, max;
+    cur = low;
+    while (cur<=high) {
+        left = cur*2+1;
+        right = cur*2+2;
+        max = cur;
+        if(left<=high && a[left]>a[max]) max = left;
+        if(right<=high && a[right]>a[max]) max = right;
+        if(cur == max){
+            break;
+        }else{
+            swap(a, cur, max);
+            cur = max;
+        }
+    }
+}
+
 /// 堆排序
 void heapSort(int a[], int size){
     int cur,parent,max,left,right;
