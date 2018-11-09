@@ -58,6 +58,39 @@ void heapSort(int a[], int size){
     }
 }
 
+void heapSort1(int a[], const int size){// 更加工整，容易理解
+    int cur, par, left, right, max;
+    for(int i=0; i<size; i++){// 上浮，建堆
+        cur = i;
+        while (cur!=0) {
+            par = (cur-1)/2;
+            if(a[cur] > a[par]){
+                swap(a, cur, par);
+                cur = par;
+            }else {
+                break;
+            }
+        }
+    }
+    for(int i=size-1; i>=0; i--){// 下沉，堆化
+        swap(a, 0, i);
+        cur = 0;
+        while (cur < i) {
+            left = cur*2+1;
+            right = cur*2+2;
+            max = cur;
+            if(left<i && a[left]>a[max]) max = left;
+            if(right<i && a[right]>a[max]) max = right;
+            if(max == cur){
+                break;
+            }else {
+                swap(a, max, cur);
+                cur = max;
+            }
+        }
+    }
+}
+
 int main()
 {
     int a[] = {12, 10, 23, 67, 8, 10};
