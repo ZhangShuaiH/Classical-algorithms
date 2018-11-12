@@ -39,6 +39,29 @@ void select_sort1(int a[], int n) {
         }
     }
 }
+
+// 优化，二元选择排序(貌似并没有提高多少效率)
+void selectSort2(int a[], int size){
+    int time = 0;
+    for(int i=1; i<=size/2; i++){
+        int min = i-1;
+        int max = size-i;
+        for(int j=i-1; j<=size-i; j++){
+            if(a[j] > a[max]){
+                max = j;
+                continue;// 减少比较次数，实测效果不明显
+            }
+            if(a[j] < a[min])
+                min = j;
+            time+=2;
+        }
+        if(max == i-1)// 排除max被换掉的情况
+            max = min;
+        swap(a, i-1, min);
+        swap(a, max, size-i);
+    }
+    myDebug(time);
+}
 int main()
 {
     int a[] = {6,4,5,3,2,1};
