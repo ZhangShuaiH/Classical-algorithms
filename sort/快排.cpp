@@ -23,32 +23,6 @@ void print(const int a[], const int low, const int high){
 整个排序过程可以递归进行，
 以此达到整个数据变成有序序列。
 ************************************/
-// 以首中尾平均数为轴
-void quick_sort0(int a[], const int low, const int high){
-    print(a, low, high);
-    cout<<low<<" "<<high<<endl;
-    if(high-low <= 1){
-        if(a[low] > a[high]){
-            int temp = a[low];
-            a[low] = a[high];
-            a[high] = temp;
-        }
-    }else {
-        int i=low, j=high, mid=(low+high)/2;
-        int axis = (a[low]+a[mid]+a[high])/3;
-        while(i < j){
-            for(; i<j && a[i]<=axis; i++);// 从左边找一个大于轴的数
-            for(; i<j && a[j]>=axis; j--);// 从右边找一个小于轴的数
-            if(i<j){
-                int temp = a[i];
-                a[i] = a[j];
-                a[j] = temp;
-            }
-        }
-        quick_sort0(a, low, i-1);
-        quick_sort0(a, i, high);
-    }
-}
 // 以首元素为轴
 void quick_sort1(int a[], const int low, const int high){
     if(low >= high) return;
@@ -62,6 +36,28 @@ void quick_sort1(int a[], const int low, const int high){
     a[i] = axis;// 填充中轴位
     quick_sort1(a, low, i-1);
     quick_sort1(a, i+1, high);
+}
+
+void quickSortThree(int a[], const int low, const int hig){// 三值取中值法
+    if(low>=hig) return;
+    int i=low, j=hig;
+    int mid=low+(hig-low>>1);
+    if((a[mid]>=a[low]&&a[mid]<=a[hig]) || // 将三值得中值换到 low
+            (a[mid]<=a[low]&&a[mid]>=a[hig]))
+        myswap(a, mid, low);
+    else if((a[hig]>=a[low]&&a[hig]<=a[mid]) ||
+            (a[hig]<=a[low]&&a[hig]>=a[mid]))
+        myswap(a, hig, low);
+    int axis = a[i];// 三中值法
+    while (i<j) {
+        for(; i<j && a[j]>=axis; j--);
+        a[i] = a[j];
+        for(; i<j && a[i]<=axis; i++);
+        a[j] = a[i];
+    }
+    a[i] = axis;
+    quickSortThree(a, low, i-1);
+    quickSortThree(a, i+1, hig);
 }
 
 int main()
