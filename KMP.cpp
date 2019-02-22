@@ -31,6 +31,21 @@ int KMP(char data[], int dlow, int dhig, char pattern[], const vector<int> &next
     else return i-strlen(pattern);
 }
 
+int forceMatch(const char data[], const char pattern[]){
+    int m = strlen(data);
+    int n = strlen(pattern);
+    int time=0;
+    for(int s=0; s<m-n; s++){
+        int i=s;
+        int j;
+        for(j=0; j<n && data[i]==pattern[j];i++,j++,time++);
+        cout<<j<<endl;
+        if(j==n)return s;
+    }
+    cout<<time<<endl;// 最坏情况下的复杂度 (m-n)/n * (n-1)*n/2=(m-n)*(n-1)/2
+    return -1;
+}
+
 int main(){
     char pattern[] = "ababaca";
     char data[] = "bacbababadababacambabacaddababacasdsd";
