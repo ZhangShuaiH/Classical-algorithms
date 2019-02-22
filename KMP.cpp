@@ -21,7 +21,7 @@ void getNext(char pattern[], vector<int> &next){
         else next[i++]=0;
 }
 
-int KMP(char data[], int dlow, int dhig, char pattern[], const vector<int> &next){
+int KMP(char data[], int dlow, int dhig, char pattern[], const vector<int> &next){// 最差情况复杂度上界是 2m-n
     int i,j;
     for(j=0, i=dlow; i<=dhig && j<strlen(pattern);)
         if(pattern[j]==data[i])j++,i++;
